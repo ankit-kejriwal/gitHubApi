@@ -1,0 +1,44 @@
+<div>
+  <p>
+    <label>Enter name of the Repository</label>
+    <input type="text" name="repoName" ng-model="main.name" required>
+      <button type="submit" ng-click = "main.callService()">OK</button>  
+  </p>
+    <label>Your URL look like {{main.displayName}}</label>
+    <div ng-if="main.show" class="loader"></div>
+  <div>
+    <h2>Statistics:</h2>
+    <div>
+      <label><span style="font-weight: bold">Number of open issues: </span>{{main.openIssuesStats.openIssuesCount}}</label>
+    </div>
+    <div>
+      <label><span style="font-weight: bold">Average age of all open issues: </span>{{main.openIssuesStats.avgAgeOfIssues}}</label>
+    </div>
+    <div>
+      <label><span style="font-weight: bold">Creation Date of oldest open issue: </span>{{main.openIssuesStats.oldestIssueDate}}</label>
+    </div>
+    <div>
+      <label><span style="font-weight: bold">Creation Date of latest open issue: </span>{{main.openIssuesStats.latestIssueDate}}</label>
+    </div>
+  </div>
+ <div>
+    <label>Open Issues</label>
+    <p>
+    <table id="grid" ng-table="main.tableParams" class="table customClass">
+      <tr ng-repeat="issue in $data">
+          <td title="'Issue Title'"><a ng-href="{{issue.html_url}}" target="_blank">{{issue.title}}</a>
+              </td>
+          <td title="'Created date'" sortable="'created_at'">
+              {{issue.created_at}}</td>
+          <td title="'Number of comments'" sortable="'comments'">
+              {{issue.comments}}</td>
+          <td title="'Last updated'" sortable="'updated_at'">
+              {{issue.updated_at}}</td>
+          <td title="'Labels'">
+              {{issue.labels[0].name}}</td>
+      </tr>
+    </table>
+    </p>
+  </div>
+
+</div>
